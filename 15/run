@@ -1,2 +1,5 @@
 #!/bin/sh
 cd io
+for i in {1..25}; do
+	cat "i/$i" | python "../$i.py"
+done
