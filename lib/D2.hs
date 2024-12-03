@@ -1,29 +1,21 @@
 module D2 where
 
-input = do
-  input <- readFile "i/2"
-  return $ map (\x -> map (\y -> read y :: Int) x) $ map words $ lines input
-
-p1 :: [[Int]] -> IO ()
-p1 i = do
-  print $ length . filter id $ map (\z -> v (\(x, y) -> x < y) z || v (\(x, y) -> x > y) z) i
+v op (p : c : r) = op (p, c) && diff p c <= 3 && v op (c : r)
   where
     diff n1 n2 = abs (n1 - n2)
-    v op (p : c : r) = op (p, c) && diff p c <= 3 && v op (c : r)
-    v _ _ = True
+v _ _ = True
 
-p2 i = do
-  print . length . filter id $ map isValid i
+f1 = map (\z -> v (\(x, y) -> x < y) z || v (\(x, y) -> x > y) z)
+
+f2 = length . filter id
+
+p1 i = f2 $ f1 i
+
+p2 i = f2 $ map (or . f1 . r) i
   where
-    isValid arr = or $ map (\arr -> or [v (\x y -> x < y) arr, v (\x y -> x > y) arr]) (removeOne arr)
-    removeOne xs = [take i xs ++ drop (i + 1) xs | i <- [0 .. length xs - 1]]
-    diff n1 n2 = abs (n1 - n2)
-    v op (p : c : r) = op p c && diff p c <= 3 && v op (c : r)
-    v _ _ = True
+    r n = [take i n ++ drop (i + 1) n | i <- [0 .. length n - 1]]
 
-main = do
-  i <- input
-  putStrLn "p1"
-  p1 i
-  putStrLn "p2"
-  p2 i
+p i = do
+  let k = map (\x -> map (\x -> read x :: Int) x) . map words $ lines i
+  print $ p1 k
+  print $ p2 k
