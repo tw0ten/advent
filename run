@@ -1,24 +1,22 @@
 #!/bin/sh
-set -e && export SHELLOPTS
-mkdir -p io/o
-
-ghc src/Main.hs lib/* \
-	-outputdir io/o \
-	-o io/o/run
-
-cd io
-
-( mkdir -p i
-	set -- "$(cat i/session)"
-	echo -n '..'
-	for i in {1..3}; do (
-		set -- "session=$1" "i/$i" "https://adventofcode.com/2024/day/$i"
+( set -- "$(cat session)" "https://adventofcode.com/20"
+for i in */; do ( set -e -- "session=$1" "$2${i}day/" "/input"
+	i="${i}io/i"
+	mkdir -p "$i"; cd "$i"
+	echo -n "$i"
+	for i in {1..25}; do
+		[ -f "$i" ] || curl -fs \
+			-o "$i" -b "$1" "$2$i$3" \
+				|| break
 		echo -n " $i"
-		[ -f "$2" ] ||
-			curl -fs -o "$2" \
-				-b "$1" "$3/input" || true
-	) done
-echo )
+	done
+	echo
+) done )
 
-echo 'advent-24'
-o/run
+echo
+
+for i in */; do (
+	cd "$i" || exit
+	echo "$i"
+	./run
+) done
