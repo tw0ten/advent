@@ -2,11 +2,11 @@ from sys import stdin
 
 
 def p1(i):
-    return ()
+    return
 
 
 def p2(i):
-    return ()
+    return
 
 
 def p(i):

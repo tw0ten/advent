@@ -1,8 +1,8 @@
-module D where
+module D0 where
 
-p1 i = (i)
+p1 i = ()
 
-p2 i = (i)
+p2 i = ()
 
 p i = do
   print $ p1 i

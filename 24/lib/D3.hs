@@ -1,38 +1,41 @@
 module D3 where
 
+import Data.Char (isDigit)
+
 rest = drop 1
 
-readInt s = if is then c : readInt (rest s) else ""
+readInt s = if b then c : readInt (rest s) else ""
   where
-    c = head s
-    is = or $ map (\i -> i == c) nums
-      where
-        nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    c = s !! 0
+    b = isDigit c
 
 parse _ [] = True
 parse [] _ = False
 parse (x : xs) (y : ys) = x == y && parse xs ys
 
-p1 i = sum $ map read . filter (\c -> not (c == "")) $ loop i
+next i = r0 "mul("
+  where
+    r0 s = if parse i s then r1 (drop (length s) i) else 0
+    r4 x y i = if parse i ")" then (read x) * (read y) else 0
+
+    r1 i = let x = readInt i in if x == "" then 0 else r2 x (drop (length x) i)
+    r2 x i = if parse i "," then r3 x (rest i) else 0
+    r3 x i = let y = readInt i in if y == "" then 0 else r4 x y (drop (length y) i)
+
+p1 i = sum $ loop i
   where
     loop "" = []
     loop i = next i : loop (rest i)
-      where
-        next i = if parse i "mul(" then readNum (drop (length "mul(") i) else ""
-        readNum i = let x = readInt i in if x == "" || not (parse (drop (length x) i) ",") then "" else secondNum x (drop (length x + 1) i)
-        secondNum x i = let y = readInt i in if not (y == "") && parse (drop (length y) i) ")" then show $ (read x :: Int) * (read y :: Int) else ""
 
-p2 i = sum $ map read . filter (\c -> not (c == "")) $ loop True i
+p2 i = sum $ loop True i
   where
     loop _ "" = []
-    loop s i = (if s then next i else "") : loop cx (rest i)
+    loop s i = (if s then next i else 0) : loop cx (rest i)
       where
-        cx = if parse i "do()" then True else if parse i "don't()" then False else s
-        next i = if parse i "mul(" then readNum (drop (length "mul(") i) else ""
-        readNum i = let x = readInt i in if x == "" || not (parse (drop (length x) i) ",") then "" else secondNum x (drop (length x + 1) i)
-        secondNum x i = let y = readInt i in if not (y == "") && parse (drop (length y) i) ")" then show $ (read x :: Int) * (read y :: Int) else ""
-
--- not proud
+        cx
+          | parse i "do()" = True
+          | parse i "don't()" = False
+          | otherwise = s
 
 p i = do
   print $ p1 i
