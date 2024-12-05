@@ -1,6 +1,8 @@
 #!/bin/sh
+set -e
+
 cd io
 for i in {1..25}; do
 	echo "/$i"
-	cat "i/$i" | python "../$i.py"
+	python "../$i.py" <"i/$i"
 done

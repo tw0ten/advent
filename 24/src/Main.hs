@@ -6,9 +6,19 @@ import D2
 import D3
 import D4
 import D5
+import D6
 
 main = do
-  i 1 [D1.p, D2.p, D3.p, D4.p, D5.p, D0.p]
+  i
+    1
+    [ D1.p,
+      D2.p,
+      D3.p,
+      D4.p,
+      D5.p,
+      D6.p,
+      D0.p
+    ]
   where
     i _ [_] = return ()
     i x (f : r) = do
