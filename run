@@ -13,9 +13,8 @@ for i in */; do ( set -e -- "session=$1" "$2${i}day/" "/input"
 	echo
 ) done )
 
-echo
-
 for i in */; do (
+	echo
 	cd "$i" || exit
 	echo "$i"
 	./run
