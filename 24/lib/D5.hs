@@ -2,14 +2,14 @@ module D5 where
 
 import Data.List (sortBy)
 
-so r = sortBy (com r)
-  where
-    com r x y
-      | (x, y) `elem` r = LT
-      | (y, x) `elem` r = GT
-      | otherwise = EQ
-
 f fi (l1, l2) = sum . map (\c -> read (c !! (length c `div` 2)) :: Int) $ fi (map (so l1) l2) l2
+  where
+    so r = sortBy (com r)
+      where
+        com r x y
+          | (x, y) `elem` r = LT
+          | (y, x) `elem` r = GT
+          | otherwise = EQ
 
 p1 (l1, l2) = f fi (l1, l2)
   where

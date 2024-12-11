@@ -1,23 +1,20 @@
 #!/bin/sh
-set -e && export SHELLOPTS
-
-( set -- "$(cat session)" "https://adventofcode.com/20"
-for i in */; do ( set -e -- "session=$1" "$2${i}day/"
-	i="${i}io/i"
-	mkdir -p "$i"; cd "$i"
-	echo -n "$i"
+( set -- "$(cat .cookie)"
+for i in */; do ( set -e -- \
+		"$1" "https://adventofcode.com/20${i}day" "${i}io/i"
+	mkdir -p "$3"; cd "$3"
+	echo -n "$3"
 	for i in {1..25}; do
 		[ -f "$i" ] || curl -fs \
-			-o "$i" -b "$1" "$2$i/input" \
+			-o "$i" -b "$1" "$2/$i/input" \
 				|| break
 		echo -n " $i"
-	done
-	echo
-) done )
+	done; echo )
+done )
 
 for i in */; do (
 	echo
 	cd "$i"
 	echo "$i"
-	./run || true
+	./run
 ) done

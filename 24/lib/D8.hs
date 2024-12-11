@@ -1,9 +1,11 @@
 module D8 where
 
-p1 i = ()
+p1 i = i
 
-p2 i = ()
+p2 i = "assignment too complicated, wtf am i supposed to even do how does this work"
 
 p i = do
-  print $ p1 i
-  print $ p2 i
+  print $ p1 k
+  print $ p2 k
+  where
+    k = lines i

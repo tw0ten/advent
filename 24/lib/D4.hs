@@ -2,10 +2,6 @@ module D4 where
 
 import Data.List
 
-parse _ [] = True
-parse [] _ = False
-parse (x : xs) (y : ys) = x == y && parse xs ys
-
 p1 i =
   0
     + (sm lo i)
@@ -22,6 +18,9 @@ p1 i =
     r = reverse
     ul = unlines i
     l = length i
+    parse _ [] = True
+    parse [] _ = False
+    parse (x : xs) (y : ys) = x == y && parse xs ys
     lo "" = 0
     lo i = count i + lo (drop 1 i)
       where
@@ -51,6 +50,7 @@ p2 k =
     fs (x, y) (i, j) = if id (x + i) (y + j) == 'M' then id (x - i) (y - j) == 'S' else False
 
 p i = do
-  let k = lines i
   print $ p1 k
   print $ p2 k
+  where
+    k = lines i

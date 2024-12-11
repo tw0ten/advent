@@ -12,10 +12,10 @@ p2 (l1, l2) = sum $ map (\b -> b * c b l2) l1
     c _ _ = 0
 
 p i = do
-  let k = s . map (\b -> read b :: Int) $ words i
   print $ p1 k
   print $ p2 k
   where
+    k = s . map (\b -> read b :: Int) $ words i
     s l = (f odd, f even)
       where
         f p = [x | (x, i) <- zip l [0 ..], p i]

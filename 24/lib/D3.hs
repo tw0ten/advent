@@ -4,17 +4,17 @@ import Data.Char (isDigit)
 
 rest = drop 1
 
-readInt s = if b then c : readInt (rest s) else ""
-  where
-    c = s !! 0
-    b = isDigit c
-
 parse _ [] = True
 parse [] _ = False
 parse (x : xs) (y : ys) = x == y && parse xs ys
 
 next i = r0 "mul("
   where
+    readInt s = if b then c : readInt (rest s) else ""
+      where
+        c = s !! 0
+        b = isDigit c
+
     r0 s = if parse i s then r1 (drop (length s) i) else 0
     r4 x y i = if parse i ")" then (read x) * (read y) else 0
 
