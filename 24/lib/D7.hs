@@ -20,7 +20,7 @@ s os (r, e) = if r `elem` so then r else 0
 
 p1 i = sum $ map (s [MUL, PLUS]) i
 
-p2 i = sum $  map (s [MUL, PLUS, CONCAT]) [] -- i
+p2 i = sum $ map (s [MUL, PLUS, CONCAT]) i
 
 p i = do
   print $ p1 k

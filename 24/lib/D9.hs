@@ -1,9 +1,6 @@
 module D9 where
 
-p1 i = i
-  where
-    checksum = 0
-    move = 0
+p1 i = ()
 
 p2 i = ()
 

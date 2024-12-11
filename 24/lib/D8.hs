@@ -1,8 +1,10 @@
 module D8 where
 
-p1 i = i
+p1 i = ()
 
-p2 i = "assignment too complicated, wtf am i supposed to even do how does this work"
+p2 i = ()
+
+-- assignment too complicated, wtf am i supposed to even do how does this work
 
 p i = do
   print $ p1 k

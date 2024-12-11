@@ -25,7 +25,6 @@ import D22
 import D23
 import D24
 import D25
-import D0
 
 main = do
   i
@@ -54,11 +53,9 @@ main = do
       D22.p,
       D23.p,
       D24.p,
-      D25.p,
-      D0.p
+      D25.p
     ]
   where
-    i _ [_] = return ()
     i x (f : r) = do
       putStrLn $ "/" ++ z
       y <- readFile $ "i/" ++ z
@@ -66,3 +63,4 @@ main = do
       i (x + 1) r
       where
         z = show x
+    i _ _ = return ()
