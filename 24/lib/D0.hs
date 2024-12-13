@@ -1,11 +1,8 @@
 module D0 where
 
-p1 i = ()
+rest = drop 1
 
-p2 i = ()
+intLen _ 0 = 0
+intLen b n = 1 + intLen b (n `div` b)
 
-p i = do
-  print $ p1 k
-  print $ p2 k
-  where
-    k = i
+split d i = let (r1, r2) = span d i in (r1, rest r2)

@@ -1,8 +1,7 @@
 module D3 where
 
+import D0 (rest)
 import Data.Char (isDigit)
-
-rest = drop 1
 
 parse _ [] = True
 parse [] _ = False

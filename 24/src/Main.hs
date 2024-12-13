@@ -26,6 +26,7 @@ import D23
 import D24
 import D25
 
+main :: IO ()
 main = do
   i
     1
@@ -35,11 +36,11 @@ main = do
       D4.p,
       D5.p,
       D6.p,
-      D7.p,
+      (\_ -> return ()),
       D8.p,
       D9.p,
       D10.p,
-      D11.p,
+      (\_ -> return ()),
       D12.p,
       D13.p,
       D14.p,
@@ -59,7 +60,7 @@ main = do
     i x (f : r) = do
       putStrLn $ "/" ++ z
       y <- readFile $ "i/" ++ z
-      f y
+      _ <- f y
       i (x + 1) r
       where
         z = show x

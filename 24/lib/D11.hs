@@ -1,35 +1,31 @@
 module D11 where
 
+import D0 (intLen)
+
 f 0 = [1]
 f n
-  | even x = [n1, n2]
+  | even x = [n1, n - (n1 * n0)]
   where
-    x = l n
-      where
-        l 0 = 0
-        l n = 1 + l (n `div` 10)
-    n0 = 10 ^ (x `div` 2)
+    base = 10
+    x = intLen base n
+    n0 = base ^ (x `div` 2)
     n1 = n `div` n0
-    n2 = n - (n1 * n0)
 f n = [n * 2024]
 
-loop 0 _ i = i
-loop x e i = loop (x - 1) e (e i)
+l 0 _ i = i
+l x e i = l (x - 1) e (e i)
 
-p1 i = length $ loop 25 (r . map f) i
+r (x : xs) = x ++ r xs
+r _ = []
+
+p1 i = length $ l 25 (r . map f) i
+
+p2 i = sum . map (\(c, _) -> c) . l 75 (c . r . map w) $ map (\c -> (1, c)) i
   where
-    r (x : xs) = x ++ r xs
-    r _ = []
-
-count y (x : xs) = y x + count y xs
-count _ _ = 0
-
-p2 i = sum . map (\(c, _) -> c) . loop 75 (c . r . map w) $ map (\c -> (1, c)) i
-  where
-    r (x : xs) = x ++ r xs
-    r _ = []
-
-    c ((a, n) : xs) = (a + count (\(a, c) -> if c == n then a else 0) xs, n) : c (filter (\(_, c) -> not (c == n)) $ xs)
+    c ((a, n) : xs) = (a + count (\(a, c) -> if c == n then a else 0) xs, n) : c (filter (\(_, c) -> not $ c == n) xs)
+      where
+        count y (x : xs) = y x + count y xs
+        count _ _ = 0
     c _ = []
 
     w (a, n) = map (\c -> (a, c)) $ f n
