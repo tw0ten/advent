@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
 
-mkdir -p io/o
 ghc -O2 -threaded -rtsopts \
-	-outputdir io/o -o io/o/run \
-	lib/* src/Main.hs
+	-outputdir io -o io/run \
+	lib/* src/*
+mkdir -p io/o
 
 cd io
-o/run +RTS -N64
+./run "$@" +RTS -N

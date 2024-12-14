@@ -1,6 +1,6 @@
 module D4 where
 
-import D0 (parse, rest)
+import D (parse, r, rest)
 import Data.List
 
 p1 i =
@@ -48,8 +48,6 @@ p2 k =
     fm (i, j) = if (fs (i, j) (1, 1) || fs (i, j) (-1, -1)) && (fs (i, j) (-1, 1) || fs (i, j) (1, -1)) then 1 else 0
     fs (x, y) (i, j) = if id (x + i) (y + j) == 'M' then id (x - i) (y - j) == 'S' else False
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
     k = lines i

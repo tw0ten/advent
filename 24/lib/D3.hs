@@ -1,6 +1,6 @@
 module D3 where
 
-import D0 (parse, rest)
+import D (parse, r, rest)
 import Data.Char (isDigit)
 
 next i = r0 "mul("
@@ -32,6 +32,4 @@ p2 i = sum $ loop True i
           | parse i "don't()" = False
           | otherwise = s
 
-p i = do
-  print $ p1 i
-  print $ p2 i
+p i = r p1 p2 i

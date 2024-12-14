@@ -1,6 +1,6 @@
 module D13 where
 
-import D0 (readInt, rest)
+import D (r, readInt, rest)
 
 p1 i = sum $ map c i
   where
@@ -9,9 +9,7 @@ p1 i = sum $ map c i
 
 p2 i = ()
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
     s _ [] = []
     s m i = let r = takeWhile (\c -> not $ m == c) i in r : s m (drop (length r + 1) i)

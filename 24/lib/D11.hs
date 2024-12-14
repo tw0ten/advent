@@ -1,6 +1,6 @@
 module D11 where
 
-import D0 (intLen, readInt)
+import D (intLen, loop, r, readInt)
 
 f 0 = [1]
 f n
@@ -12,15 +12,12 @@ f n
     n1 = n `div` n0
 f n = [n * 2024]
 
-l 0 _ i = i
-l x e i = l (x - 1) e (e i)
+l (x : xs) = x ++ l xs
+l _ = []
 
-r (x : xs) = x ++ r xs
-r _ = []
+p1 i = length $ loop 25 (l . map f) i
 
-p1 i = length $ l 25 (r . map f) i
-
-p2 i = sum . map (\(c, _) -> c) . l 75 (c . r . map w) $ map (\c -> (1, c)) i
+p2 i = sum . map (\(c, _) -> c) . loop 75 (c . l . map w) $ map (\c -> (1, c)) i
   where
     c ((a, n) : xs) = (a + count (\(a, c) -> if c == n then a else 0) xs, n) : c (filter (\(_, c) -> not $ c == n) xs)
       where
@@ -30,8 +27,6 @@ p2 i = sum . map (\(c, _) -> c) . l 75 (c . r . map w) $ map (\c -> (1, c)) i
 
     w (a, n) = map (\c -> (a, c)) $ f n
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
     k = map readInt $ words i

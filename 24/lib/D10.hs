@@ -1,6 +1,6 @@
 module D10 where
 
-import D0 (enlist, readInt)
+import D (enlist, r, readInt)
 
 p1 i = sum $ map (sum . map (f 0)) k
   where
@@ -27,8 +27,6 @@ p1 i = sum $ map (sum . map (f 0)) k
 
 p2 i = i
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
     k = map (map (readInt . enlist)) $ lines i

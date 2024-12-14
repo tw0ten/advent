@@ -1,5 +1,7 @@
 module D6 where
 
+import D (r)
+
 data Direction = UP | RIGHT | DOWN | LEFT
 
 turnRight UP = RIGHT
@@ -40,9 +42,7 @@ p1 i =
 
 p2 i = ()
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
     k = map (map p) $ lines i
       where

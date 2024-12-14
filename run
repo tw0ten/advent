@@ -1,20 +1,23 @@
 #!/bin/sh
+days='1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25'
 ( set -- "$(cat .cookie)"
 for i in */; do ( set -e -- \
 		"$1" "https://adventofcode.com/20${i}day" "${i}io/i"
 	mkdir -p "$3"; cd "$3"
-	echo -n "$3"
-	for i in {1..25}; do
+	printf '%s' "$3"
+	for i in $days; do
 		[ -f "$i" ] || curl -fs \
 			-o "$i" -b "$1" "$2/$i/input" \
 				|| break
-		echo -n " $i"
+		printf '%s' " $i"
 	done; echo )
 done )
 
+echo
+
 for i in */; do (
-	echo
 	cd "$i"
-	echo "$i"
-	./run
+	printf '%s' "${i}io/o"
+	./run $days
+	echo
 ) done

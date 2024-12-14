@@ -1,6 +1,6 @@
 module D2 where
 
-import D0 (diff, readInt)
+import D (diff, r, readInt)
 
 f1 = map (\z -> v (\(x, y) -> x < y) z || v (\(x, y) -> x > y) z)
   where
@@ -13,8 +13,6 @@ p2 i = length . filter id $ map (or . f1 . r) i
   where
     r n = [take i n ++ drop (i + 1) n | i <- [0 .. length n - 1]]
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
     k = map (map readInt) . map words $ lines i

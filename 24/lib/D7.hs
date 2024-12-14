@@ -1,7 +1,7 @@
 module D7 where
 
 import Control.Monad (replicateM)
-import D0 (readInt, rest, split)
+import D (r, readInt, rest, splitElem)
 
 data Op = MUL | PLUS | CONCAT
 
@@ -23,11 +23,9 @@ p1 i = sum $ map (s [MUL, PLUS]) i
 
 p2 i = sum $ map (s [MUL, PLUS, CONCAT]) i
 
-p i = do
-  print $ p1 k
-  print $ p2 k
+p i = r p1 p2 k
   where
-    k = map (\(r, e) -> (readInt r, s0 $ rest e)) $ map (\c -> (split (\c -> not $ c == ':') c)) $ lines i
+    k = map (\(r, e) -> (readInt r, s0 $ rest e)) $ map (\c -> (splitElem ':' c)) $ lines i
       where
         s0 c = if length c > 0 then readInt n : s0 (drop (length n + 1) c) else []
           where
