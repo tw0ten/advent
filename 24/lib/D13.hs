@@ -1,5 +1,7 @@
 module D13 where
 
+import D0 (readInt, rest)
+
 p1 i = sum $ map c i
   where
     (p1, p2) = (3, 1)
@@ -19,7 +21,7 @@ p i = do
           where
             p j i =
               let [x, y] =
-                    map (\c -> read . drop 1 $ dropWhile (\c -> not $ c == j) c :: Int) $
+                    map (\c -> readInt . rest $ dropWhile (\c -> not $ c == j) c) $
                       s ',' i
                in (x, y)
             pb = p '+'

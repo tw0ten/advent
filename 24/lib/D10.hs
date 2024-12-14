@@ -1,5 +1,7 @@
 module D10 where
 
+import D0 (enlist, readInt)
+
 p1 i = sum $ map (sum . map (f 0)) k
   where
     k = [[((x, y), v) | (y, v) <- zip [0 ..] r] | (x, r) <- zip [0 ..] i]
@@ -12,7 +14,8 @@ p1 i = sum $ map (sum . map (f 0)) k
       | v == t = 1
       where
         t = 9
-    f e ((x, y), v) = -- uniq aparently, 0 tied to 9, fk
+    f e ((x, y), v) =
+      -- uniq aparently, 0 tied to 9, fk
       sum
         [ n (1, 0),
           n (0, 1),
@@ -28,4 +31,4 @@ p i = do
   print $ p1 k
   print $ p2 k
   where
-    k = map (map (\c -> read [c] :: Int)) $ lines i
+    k = map (map (readInt . enlist)) $ lines i

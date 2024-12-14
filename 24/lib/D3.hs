@@ -1,11 +1,7 @@
 module D3 where
 
-import D0 (rest)
+import D0 (parse, rest)
 import Data.Char (isDigit)
-
-parse _ [] = True
-parse [] _ = False
-parse (x : xs) (y : ys) = x == y && parse xs ys
 
 next i = r0 "mul("
   where

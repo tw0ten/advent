@@ -1,6 +1,6 @@
 module D11 where
 
-import D0 (intLen)
+import D0 (intLen, readInt)
 
 f 0 = [1]
 f n
@@ -34,4 +34,4 @@ p i = do
   print $ p1 k
   print $ p2 k
   where
-    k = map (\i -> read i :: Int) $ words i
+    k = map readInt $ words i

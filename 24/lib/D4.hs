@@ -1,32 +1,31 @@
 module D4 where
 
+import D0 (parse, rest)
 import Data.List
 
 p1 i =
-  0
-    + (sm lo i)
-    + (sm (lo . r) i)
-    + (sm lo tp)
-    + (sm (lo . r) tp)
-    + (di (l + 1) ul)
-    + (di (l + 1) $ r ul)
-    + (di (l - 1) ul)
-    + (di (l - 1) $ r ul)
+  sum
+    [ sm lo i,
+      sm (lo . r) i,
+      sm lo tp,
+      sm (lo . r) tp,
+      di (l + 1) ul,
+      di (l + 1) $ r ul,
+      di (l - 1) ul,
+      di (l - 1) $ r ul
+    ]
   where
     sm i = sum . map i
     tp = transpose i
     r = reverse
     ul = unlines i
     l = length i
-    parse _ [] = True
-    parse [] _ = False
-    parse (x : xs) (y : ys) = x == y && parse xs ys
     lo "" = 0
-    lo i = count i + lo (drop 1 i)
+    lo i = count i + lo (rest i)
       where
         count i = if parse i "XMAS" then 1 else 0
     di _ "" = 0
-    di a i = (parse a i "XMAS") + (di a (drop 1 i))
+    di a i = (parse a i "XMAS") + (di a (rest i))
       where
         parse _ _ [] = 1
         parse _ [] _ = 0

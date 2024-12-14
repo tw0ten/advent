@@ -1,7 +1,7 @@
 module D7 where
 
 import Control.Monad (replicateM)
-import D0 (split)
+import D0 (readInt, rest, split)
 
 data Op = MUL | PLUS | CONCAT
 
@@ -27,8 +27,8 @@ p i = do
   print $ p1 k
   print $ p2 k
   where
-    k = map (\(r, e) -> (read r :: Int, s0 $ drop 1 e)) $ map (\c -> (split (\c -> not $ c == ':') c)) $ lines i
+    k = map (\(r, e) -> (readInt r, s0 $ rest e)) $ map (\c -> (split (\c -> not $ c == ':') c)) $ lines i
       where
-        s0 c = if length c > 0 then (read n :: Int) : s0 (drop (length n + 1) c) else []
+        s0 c = if length c > 0 then readInt n : s0 (drop (length n + 1) c) else []
           where
             n = takeWhile (\c -> not $ c == ' ') c

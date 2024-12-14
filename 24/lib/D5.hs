@@ -1,9 +1,9 @@
 module D5 where
 
-import D0 (split)
+import D0 (readInt, split)
 import Data.List (sortBy)
 
-f fi (l1, l2) = sum . map (\c -> read (c !! (length c `div` 2)) :: Int) $ fi (map (so l1) l2) l2
+f fi (l1, l2) = sum . map (\c -> readInt $ c !! (length c `div` 2)) $ fi (map (so l1) l2) l2
   where
     so r = sortBy (com r)
       where
