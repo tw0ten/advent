@@ -7,20 +7,21 @@ p1 i = sum $ map c i
     (p1, p2) = (3, 1)
     c (((b1x, b1y), (b2x, b2y)), (rx, ry)) = 0
 
-p2 i = ()
+p2 i = i
 
 p i = r p1 p2 k
   where
     s _ [] = []
-    s m i = let r = takeWhile (\c -> not $ m == c) i in r : s m (drop (length r + 1) i)
+    s m i =
+      let r = takeWhile (not . (==) m) i
+       in r : s m (drop (length r + 1) i)
     k = map r . s "" $ lines i
       where
         r m = let [a, b, p] = m in ((pb a, pb b), pp p)
           where
             p j i =
               let [x, y] =
-                    map (\c -> readInt . rest $ dropWhile (\c -> not $ c == j) c) $
-                      s ',' i
+                    map (readInt . rest . dropWhile (not . (==) j)) $ s ',' i
                in (x, y)
             pb = p '+'
             pp = p '='

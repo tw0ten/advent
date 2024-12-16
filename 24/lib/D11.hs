@@ -12,14 +12,13 @@ f n
     n1 = n `div` n0
 f n = [n * 2024]
 
-l (x : xs) = x ++ l xs
-l _ = []
+p1 i = length $ loop 25 (concatMap f) i
 
-p1 i = length $ loop 25 (l . map f) i
-
-p2 i = sum . map (\(c, _) -> c) . loop 75 (c . l . map w) $ map (\c -> (1, c)) i
+p2 i = sum . map (\(c, _) -> c) . loop 75 (c . concatMap w) $ map (\c -> (1, c)) i
   where
-    c ((a, n) : xs) = (a + count (\(a, c) -> if c == n then a else 0) xs, n) : c (filter (\(_, c) -> not $ c == n) xs)
+    c ((a, n) : xs) =
+      (a + count (\(a, c) -> if c == n then a else 0) xs, n)
+        : c (filter (\(_, c) -> not $ c == n) xs)
       where
         count y (x : xs) = y x + count y xs
         count _ _ = 0

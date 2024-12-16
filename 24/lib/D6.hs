@@ -1,18 +1,11 @@
 module D6 where
 
-import D (r)
-
-data Direction = UP | RIGHT | DOWN | LEFT
+import D (Direction (..), dirV, r)
 
 turnRight UP = RIGHT
 turnRight RIGHT = DOWN
 turnRight DOWN = LEFT
 turnRight LEFT = UP
-
-dirVec UP = (0, 1)
-dirVec RIGHT = (1, 0)
-dirVec DOWN = (0, -1)
-dirVec LEFT = (-1, 0)
 
 data Cell = GUARD Direction | WALL | EMPTY
 
@@ -32,7 +25,7 @@ p1 i =
     f _ = True
     l m visited = map (map f) m
       where
-        f (i, j, GUARD a) = (i, j, let (x, y) = dirVec a in o (GUARD a) (id m (i + x) (j + y)))
+        f (i, j, GUARD a) = (i, j, let (x, y) = dirV a in o (GUARD a) (id m (i + x) (j + y)))
         f a = a
         o (GUARD a) (_, _, WALL) = GUARD (turnRight a)
         o _ _ = EMPTY

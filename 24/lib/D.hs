@@ -22,6 +22,29 @@ intLen b n = 1 + intLen b (n `div` b)
 
 split d i = let (r1, r2) = span d i in (r1, rest r2)
 
-splitElem d = split (notEq d)
+splitElem d = split (not . (==) d)
 
-notEq a b = not $ a == b
+type V2 a = (a, a)
+
+type V2I = V2 Int
+
+data Direction = UP | RIGHT | DOWN | LEFT
+
+instance Show Direction where
+  show UP = "^"
+  show DOWN = "v"
+  show LEFT = "<"
+  show RIGHT = ">"
+
+parseDir c = l [UP, DOWN, LEFT, RIGHT]
+  where
+    l = lookup c . map (\c -> (show c, c))
+
+dirV UP = (0, 1)
+dirV RIGHT = (1, 0)
+dirV DOWN = (0, -1)
+dirV LEFT = (-1, 0)
+
+mmap f = map (map f)
+
+ib x = if x then 1 else 0

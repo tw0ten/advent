@@ -1,6 +1,6 @@
 module D10 where
 
-import D (enlist, r, readInt)
+import D (Direction (..), dirV, enlist, mmap, r, readInt)
 
 p1 i = sum $ map (sum . map (f 0)) k
   where
@@ -17,16 +17,16 @@ p1 i = sum $ map (sum . map (f 0)) k
     f e ((x, y), v) =
       -- uniq aparently, 0 tied to 9, fk
       sum
-        [ n (1, 0),
-          n (0, 1),
-          n (0, -1),
-          n (-1, 0)
+        [ n UP,
+          n RIGHT,
+          n LEFT,
+          n DOWN
         ]
       where
-        n (dx, dy) = f (v + 1) (id (x + dx, y + dy))
+        n d = let (dx, dy) = dirV d in f (v + 1) (id (x + dx, y + dy))
 
 p2 i = i
 
 p i = r p1 p2 k
   where
-    k = map (map (readInt . enlist)) $ lines i
+    k = mmap (readInt . enlist) $ lines i

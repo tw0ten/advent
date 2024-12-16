@@ -1,6 +1,6 @@
 module D14 where
 
-import D (loop, notEq, readInt, rest, splitElem,r)
+import D (loop, r, readInt, rest, splitElem)
 
 p1 (i, (w, h)) = q $ loop 100 f i
   where
@@ -19,15 +19,17 @@ p1 (i, (w, h)) = q $ loop 100 f i
         f p = filter (fi p)
           where
             fi p (i, _) = p i
-    f i = map m $ i
+    f i = map m i
       where
         m ((x, y), v) =
           let (vx, vy) = v
-           in (((w + x + vx) `mod` w, (h + y + vy) `mod` h), v)
+           in ((wa w x vx, wa h y vy), v)
+          where
+            wa s d v = (s + d + v) `mod` s
 
 -- how the fuck does the christmas tree look? what/???
 -- am i supposed to do it manually?
-p2 (i, (w, h)) = ()
+p2 (i, (w, h)) = i
 
 p i = r p1 p2 k
   where
@@ -36,5 +38,5 @@ p i = r p1 p2 k
         f i = let (p, v) = i in (pa p, pa v)
           where
             pa i =
-              let (x, y) = splitElem ',' . rest $ dropWhile (notEq '=') i
+              let (x, y) = splitElem ',' . rest $ dropWhile (not . (==) '=') i
                in (readInt x, readInt y)

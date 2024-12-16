@@ -1,6 +1,6 @@
 module D4 where
 
-import D (parse, r, rest)
+import D (ib, parse, r, rest)
 import Data.List
 
 p1 i =
@@ -21,32 +21,30 @@ p1 i =
     ul = unlines i
     l = length i
     lo "" = 0
-    lo i = count i + lo (rest i)
+    lo i = c + lo (rest i)
       where
-        count i = if parse i "XMAS" then 1 else 0
+        c = ib $ parse i "XMAS"
     di _ "" = 0
-    di a i = (parse a i "XMAS") + (di a (rest i))
+    di a i = parse a i "XMAS" + (di a $ rest i)
       where
         parse _ _ [] = 1
         parse _ [] _ = 0
-        parse a (x : xs) (y : ys) = if x == y then parse a (drop a xs) ys else 0
+        parse a (x : xs) (y : ys) =
+          if x == y then parse a (drop a xs) ys else 0
 
-p2 k =
-  sum $
-    map
-      f
-      [ (i, j, v)
-      | (i, row) <- zip [0 ..] k,
-        (j, v) <- zip [0 ..] row
-      ]
+p2 k = sum $ map f [((i, j), v) | (i, r) <- zip [0 ..] k, (j, v) <- zip [0 ..] r]
   where
-    l = length k
-    id i j
-      | i < 0 || j < 0 || i >= l || j >= l = ' '
-      | otherwise = k !! i !! j
-    f (i, j, v) = if v == 'A' then fm (i, j) else 0
-    fm (i, j) = if (fs (i, j) (1, 1) || fs (i, j) (-1, -1)) && (fs (i, j) (-1, 1) || fs (i, j) (1, -1)) then 1 else 0
-    fs (x, y) (i, j) = if id (x + i) (y + j) == 'M' then id (x - i) (y - j) == 'S' else False
+    f (ij, v) = if v == 'A' then fm ij else 0
+      where
+        fm (i, j) = ib $ (fs (1, 1) || fs (-1, -1)) && (fs (-1, 1) || fs (1, -1))
+          where
+            fs (x, y) = id (x + i) (y + j) == 'M' && id (i - x) (j - y) == 'S'
+              where
+                id i j
+                  | i < 0 || j < 0 || i >= l || j >= l = '\0'
+                  | otherwise = k !! i !! j
+                  where
+                    l = length k
 
 p i = r p1 p2 k
   where
