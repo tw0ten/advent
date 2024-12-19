@@ -4,7 +4,7 @@ set -e
 ghc -O2 -threaded -rtsopts \
 	-outputdir io -o io/run \
 	lib/* src/*
-mkdir -p io/o
 
 cd io
 ./run "$@" +RTS -N
+cd o; for i; do echo; cat $i; done; echo

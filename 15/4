@@ -1,0 +1,36 @@
+#!/bin/python
+
+import sys
+import hashlib
+
+
+def md5(s):
+    m = hashlib.md5()
+    m.update(s.encode('utf-8'))
+    return m.hexdigest()
+
+
+def p1(i):
+    j = 0
+    while True:
+        j = j+1
+        if md5(i+str(j)).startswith("00000"):
+            break
+    return j
+
+
+def p2(i):
+    j = 0
+    while True:
+        j = j+1
+        if md5(i+str(j)).startswith("000000"):
+            break
+    return j
+
+
+def p(i):
+    print(p1(i))
+    print(p2(i))
+
+
+p(sys.stdin.read().strip())

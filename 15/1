@@ -1,4 +1,6 @@
-from sys import stdin
+#!/bin/python
+
+import sys
 
 
 def p1(i):
@@ -30,4 +32,4 @@ def p(i):
     print(p2(i))
 
 
-p(stdin.read())
+p(sys.stdin.read())

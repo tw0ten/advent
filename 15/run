@@ -1,13 +1,9 @@
 #!/bin/sh
 set -e
 
-mkdir -p io/o
-
 cd io
 for i; do
-	python \
-		< "i/$i" \
-		> "o/$i" \
-		"../$i.py"
+	"../$i" < "i/$i" > "o/$i"
 	printf '%s' " $i"
+	cat o/$i
 done

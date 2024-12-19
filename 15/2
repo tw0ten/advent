@@ -1,4 +1,6 @@
-from sys import stdin
+#!/bin/python
+
+import sys
 
 
 def min(x, y, z):
@@ -34,4 +36,4 @@ def p(i):
     print(p2(i))
 
 
-p(stdin.read())
+p(sys.stdin.read())
