@@ -1,6 +1,6 @@
 module Main where
 
-import D0 (days)
+import M (days)
 import System.Environment (getArgs)
 import System.IO (hFlush, stdout)
 

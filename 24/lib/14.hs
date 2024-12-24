@@ -38,5 +38,5 @@ p i = r p1 p2 k
         f i = let (p, v) = i in (pa p, pa v)
           where
             pa i =
-              let (x, y) = splitElem ',' . rest $ dropWhile (not . (==) '=') i
+              let (x, y) = splitElem ',' . rest $ dropWhile ((/=) '=') i
                in (readInt x, readInt y)

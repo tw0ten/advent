@@ -1,4 +1,4 @@
-module D0 where
+module M where
 
 import D1
 import D10

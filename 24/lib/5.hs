@@ -12,13 +12,13 @@ f fi (l1, l2) = sum . map (\c -> readInt $ c !! (length c `div` 2)) $ fi (map (s
           | (y, x) `elem` r = GT
           | otherwise = EQ
 
-p1 (l1, l2) = f fi (l1, l2)
+p1 i = f fi i
   where
-    fi i s = filter (`elem` s) i
+    fi s = filter (`elem` s)
 
-p2 (l1, l2) = f fi (l1, l2)
+p2 i = f fi i
   where
-    fi i s = filter (\c -> not $ elem c s) i
+    fi s = filter (not . (`elem` s))
 
 p i = r p1 p2 k
   where
@@ -28,4 +28,4 @@ p i = r p1 p2 k
       where
         s0 c = if length c > 0 then n : s0 (drop (length n + 1) c) else []
           where
-            n = takeWhile (not . (==) ',') c
+            n = takeWhile ((/=) ',') c

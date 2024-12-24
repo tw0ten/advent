@@ -13,7 +13,7 @@ p i = r p1 p2 k
   where
     s _ [] = []
     s m i =
-      let r = takeWhile (not . (==) m) i
+      let r = takeWhile ((/=) m) i
        in r : s m (drop (length r + 1) i)
     k = map r . s "" $ lines i
       where
@@ -21,7 +21,7 @@ p i = r p1 p2 k
           where
             p j i =
               let [x, y] =
-                    map (readInt . rest . dropWhile (not . (==) j)) $ s ',' i
+                    map (readInt . rest . dropWhile ((/=) j)) $ s ',' i
                in (x, y)
             pb = p '+'
             pp = p '='

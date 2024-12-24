@@ -1,8 +1,6 @@
 module D2 where
 
-import D (diff, mmap, r, readInt)
-
-f0 = length . filter id
+import D (count, diff, mmap, r, readInt)
 
 f1 i = map (\z -> v (uncurry (<)) z || v (uncurry (>)) z) i
   where
@@ -10,9 +8,9 @@ f1 i = map (\z -> v (uncurry (<)) z || v (uncurry (>)) z) i
       op (p, c) && diff p c <= 3 && v op (c : r)
     v _ _ = True
 
-p1 i = f0 $ f1 i
+p1 i = count id $ f1 i
 
-p2 i = f0 $ map (or . f1 . r) i
+p2 i = count id $ map (or . f1 . r) i
   where
     r n = [take i n ++ drop (i + 1) n | i <- [0 .. length n - 1]]
 

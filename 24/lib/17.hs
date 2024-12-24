@@ -26,5 +26,5 @@ p i = r p1 p2 k
        in ((r a, r b, r c), o p)
       where
         r = readInt . d
-        o = map (readInt . enlist) . filter (not . (==) ',') . d
-        d = drop 2 . dropWhile (not . (==) ':')
+        o = map (readInt . enlist) . filter ((/=) ',') . d
+        d = drop 2 . dropWhile ((/=) ':')

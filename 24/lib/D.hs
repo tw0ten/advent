@@ -22,7 +22,7 @@ intLen b n = 1 + intLen b (n `div` b)
 
 split d i = let (r1, r2) = span d i in (r1, rest r2)
 
-splitElem d = split (not . (==) d)
+splitElem d = split ((/=) d)
 
 type V2 a = (a, a)
 
@@ -48,3 +48,7 @@ dirV LEFT = (-1, 0)
 mmap f = map (map f)
 
 ib x = if x then 1 else 0
+
+count x = length . filter x
+
+zipV i = [[(v, (x, y)) | (v, x) <- zip r [0 ..]] | (y, r) <- zip [0 ..] i]
