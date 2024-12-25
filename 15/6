@@ -1,0 +1,20 @@
+#!/bin/python
+
+import sys
+
+
+def p1(i):
+    return i
+
+
+def p2(i):
+    return
+
+
+def p(i):
+    i = i
+    print(p1(i))
+    print(p2(i))
+
+
+p(sys.stdin.read().strip().split("\n"))

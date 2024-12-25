@@ -2,9 +2,9 @@ module D15 where
 
 import D (enlist, mmap, parseDir, r, splitElem)
 
-p1 (im, ii) = sum . map (sum . map (\(c, _) -> gps c) . fi) $ s im ii
+p1 (im, ii) = sum . map (sum . map (gps . fst) . fi) $ s im ii
   where
-    fi = filter (\(_, c) -> f c)
+    fi = filter (f . snd)
       where
         f BOX = True
         f _ = False

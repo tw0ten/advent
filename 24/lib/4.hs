@@ -1,7 +1,7 @@
-module D4 where
+module D4 (p) where
 
 import D (ib, parse, r, rest)
-import Data.List
+import Data.List (transpose)
 
 p1 i =
   sum

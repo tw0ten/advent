@@ -1,4 +1,4 @@
-module D3 where
+module D3 (p) where
 
 import D (parse, r, rest)
 import Data.Char (isDigit)

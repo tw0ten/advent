@@ -6,8 +6,10 @@ import System.IO (hFlush, stdout)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  mapM_ i . filter (\(_, n) -> show n `elem` args) $ zip days [1 ..]
+  a <- getArgs
+  mapM_ i
+    . filter (\(_, n) -> show n `elem` a)
+    $ zip days [1 ..]
   where
     i (f, x) = do
       y <- readFile $ "i/" ++ z

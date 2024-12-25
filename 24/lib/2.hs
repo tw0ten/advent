@@ -1,4 +1,4 @@
-module D2 where
+module D2 (p) where
 
 import D (count, diff, mmap, r, readInt)
 

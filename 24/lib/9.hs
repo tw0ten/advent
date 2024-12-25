@@ -1,4 +1,4 @@
-module D9 where
+module D9 (p) where
 
 import D (enlist, r, readInt, rest)
 

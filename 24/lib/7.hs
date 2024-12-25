@@ -1,4 +1,4 @@
-module D7 where
+module D7 (p) where
 
 import Control.Monad (replicateM)
 import D (r, readInt, rest, splitElem)

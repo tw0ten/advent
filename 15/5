@@ -43,7 +43,7 @@ def p2(i):
     for i in i:
         if p(i):
             c = c+1
-    return c
+    return i
 
 
 def p(i):
@@ -51,4 +51,4 @@ def p(i):
     print(p2(i))
 
 
-p(sys.stdin.read().split("\n"))
+p(sys.stdin.read().strip().split("\n"))

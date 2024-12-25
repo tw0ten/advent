@@ -14,7 +14,7 @@ p i = r p1 p2 k
       where
         f k i =
           snd
-            . head
+            . (\a -> a !! 0)
             . concat
             . map
               (filter (\(c, _) -> k == c))

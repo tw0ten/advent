@@ -5,9 +5,9 @@ import Data.List (sortBy)
 
 f fi (l1, l2) = sum . map (\c -> readInt $ c !! (length c `div` 2)) $ fi (map (so l1) l2) l2
   where
-    so r = sortBy (com r)
+    so r = sortBy com
       where
-        com r x y
+        com x y
           | (x, y) `elem` r = LT
           | (y, x) `elem` r = GT
           | otherwise = EQ
@@ -18,7 +18,7 @@ p1 i = f fi i
 
 p2 i = f fi i
   where
-    fi s = filter (not . (`elem` s))
+    fi i s = filter (\c -> not $ elem c s) i
 
 p i = r p1 p2 k
   where

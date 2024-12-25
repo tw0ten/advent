@@ -1,4 +1,4 @@
-module D1 where
+module D1 (p) where
 
 import D (diff, r, readInt)
 import Data.List (sort)

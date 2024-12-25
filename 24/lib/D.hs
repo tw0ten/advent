@@ -24,6 +24,11 @@ split d i = let (r1, r2) = span d i in (r1, rest r2)
 
 splitElem d = split ((/=) d)
 
+splitL _ [] = []
+splitL c s =
+  let (r, rs) = split c s
+   in r : splitL c rs
+
 type V2 a = (a, a)
 
 type V2I = V2 Int

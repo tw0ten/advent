@@ -5,5 +5,4 @@ cd io
 for i; do
 	"../$i" < "i/$i" > "o/$i"
 	printf '%s' " $i"
-	cat o/$i
 done
