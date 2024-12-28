@@ -1,4 +1,4 @@
-module D5 where
+module D5 (p) where
 
 import D (r, readInt, splitElem)
 import Data.List (sortBy)
@@ -18,7 +18,7 @@ p1 i = f fi i
 
 p2 i = f fi i
   where
-    fi i s = filter (\c -> not $ elem c s) i
+    fi i s = filter (not . (`elem` s)) i
 
 p i = r p1 p2 k
   where

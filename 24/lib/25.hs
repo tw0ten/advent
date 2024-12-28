@@ -1,4 +1,4 @@
-module D25 (p) where
+module D25 where
 
 import D (count, r, splitL)
 import Data.List (partition, zip5)

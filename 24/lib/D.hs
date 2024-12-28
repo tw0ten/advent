@@ -57,3 +57,5 @@ ib x = if x then 1 else 0
 count x = length . filter x
 
 zipV i = [[(v, (x, y)) | (v, x) <- zip r [0 ..]] | (y, r) <- zip [0 ..] i]
+
+dropBack x i = take (length i - x) i

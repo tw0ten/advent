@@ -1,4 +1,4 @@
-module D24 (p) where
+module D24 where
 
 import D (r, rest, splitElem)
 import Data.List (partition, sortBy, sortOn)
@@ -23,7 +23,7 @@ p1 (s, i) = f $ re s i
             f n = lookup n s
     re s _ = s
 
-p2 (s, i) = ()
+p2 (s, i) = "what"
   where
     a = 4
 
