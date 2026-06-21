@@ -3,6 +3,6 @@ set -e
 
 cd io
 for i; do
-	"../$i" < "i/$i" > "o/$i"
+	"../$i" <"i/$i" >"o/$i"
 	printf '%s' " $i"
 done
